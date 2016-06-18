@@ -50,7 +50,11 @@ public class AnagramDictionary {
     }
 
     public boolean isGoodWord(String word, String base) {
-        return true;
+
+        if(wordSet.contains(word) && !word.contains(base))
+            return true;
+
+        return false;
     }
 
     public ArrayList<String> getAnagramsWithOneMoreLetter(String word) {
