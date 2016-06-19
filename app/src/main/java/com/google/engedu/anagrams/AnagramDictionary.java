@@ -16,9 +16,11 @@ public class AnagramDictionary {
     private static final int DEFAULT_WORD_LENGTH = 3;
     private static final int MAX_WORD_LENGTH = 7;
     private Random random = new Random();
+    private int wordLength =DEFAULT_WORD_LENGTH;
     private HashSet<String> wordSet = new HashSet<String>();
     private ArrayList<String> wordList = new ArrayList<String>();
     private HashMap<String,ArrayList<String>> lettersToWord = new HashMap<String,ArrayList<String>>();
+    private HashMap<Integer,ArrayList<String>> sizeToWords = new HashMap<Integer, ArrayList<String>>();
 
     public AnagramDictionary(InputStream wordListStream) throws IOException {
         BufferedReader in = new BufferedReader(new InputStreamReader(wordListStream));
@@ -37,6 +39,13 @@ public class AnagramDictionary {
                 ArrayList<String> temp = new ArrayList<String>();
                 temp.add(word);
                 lettersToWord.put(key,temp);
+            }
+            if(sizeToWords.containsKey(word.length()))
+                sizeToWords.get(word.length()).add(word);
+            else{
+                ArrayList<String> temp = new ArrayList<String>();
+                temp.add(word);
+                sizeToWords.put(word.length(), temp);
             }
 
 
@@ -74,7 +83,27 @@ public class AnagramDictionary {
         return result;
     }
 
-    public String pickGoodStarterWord() {
-        return "foo";
+    public String pickGoodStarterWord()
+    { boolean hasMin=false;
+        String starter;
+        ArrayList<String> words=sizeToWords.get(wordLength);
+        int index=random.nextInt(words.size());
+        do{
+            if(index> (words.size()-1))
+            {
+                index=0;
+            }
+            starter=words.get(index);
+
+            if(getAnagramsWithOneMoreLetter(starter).size()>=MIN_NUM_ANAGRAMS)
+                hasMin=true;
+
+            index++;
+        }while(!hasMin);
+
+        if(wordLength<=MAX_WORD_LENGTH)
+            wordLength++;
+
+        return starter;
     }
 }
