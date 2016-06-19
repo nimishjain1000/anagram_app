@@ -9,7 +9,8 @@
     tools:showIn="@layout/activity_anagrams" tools:context=".AnagramsActivity">
     <ScrollView
         android:layout_height="match_parent"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:background="@drawable/ang4">
         <RelativeLayout
             android:layout_height="match_parent"
             android:layout_width="match_parent">
