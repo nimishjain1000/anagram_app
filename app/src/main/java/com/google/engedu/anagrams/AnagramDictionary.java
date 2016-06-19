@@ -59,6 +59,18 @@ public class AnagramDictionary {
 
     public ArrayList<String> getAnagramsWithOneMoreLetter(String word) {
         ArrayList<String> result = new ArrayList<String>();
+        for(int i=97;i<122;i++)
+        {
+            String newWord=word+ (char)i;
+            if(lettersToWord.containsKey(alphaOrder(newWord)))
+            {
+                ArrayList<String> temp=lettersToWord.get(alphaOrder(newWord));
+                for(String s :temp)
+                    result.add(s);
+
+            }
+        }
+
         return result;
     }
 

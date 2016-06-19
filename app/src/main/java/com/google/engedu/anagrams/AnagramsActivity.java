@@ -27,7 +27,7 @@ import java.util.ArrayList;
 public class AnagramsActivity extends AppCompatActivity {
 
     public static final String START_MESSAGE = "Find as many words as possible that can be formed by adding one letter to <big>%s</big> (but that do not contain the substring %s).";
-    private AnagramDictionary dictionary;
+    private AnagramDictionary dictionary; //object of anagramdictionary
     private String currentWord;
     private ArrayList<String> anagrams;
 
@@ -39,7 +39,7 @@ public class AnagramsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         AssetManager assetManager = getAssets();
         try {
-            InputStream inputStream = assetManager.open("words.txt");
+            InputStream inputStream = assetManager.open("words.txt"); //Attempt to load contents into memory, for fast small reads.
             dictionary = new AnagramDictionary(inputStream);
         } catch (IOException e) {
             Toast toast = Toast.makeText(this, "Could not load dictionary", Toast.LENGTH_LONG);
